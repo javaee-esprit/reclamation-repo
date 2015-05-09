@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:f="http://xmlns.jcp.org/jsf/core"
+	   xmlns:h="http://xmlns.jcp.org/jsf/html"
+	   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	   xmlns:jsf="http://xmlns.jcp.org/jsf"
+	   xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	   xmlns:p="http://primefaces.org/ui"
+	   template="/WEB-INF/template/template.xhtml">
+	   
+	<ui:define name="title">student home</ui:define>   
+	<ui:define name="content">
+		<h1>Soumettre une réclamation</h1>
+		<hr/>
+		<p:panel header="Nouvelle réclamation">
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputText value="Titre" />
+					<p:inputText value="#{claiming.reclamation.titre}"/>
+					<h:outputText value="Description" />
+					<p:inputTextarea value="#{claiming.reclamation.description}"/>
+					<h:outputText value="Type" />
+					<p:selectOneMenu value="#{claiming.reclamation.typeReclamation}" converter="typeReclamationConverter">
+						<f:selectItem itemLabel="choisir..." itemValue=""/>
+						<f:selectItems value="#{claiming.typeReclamations}" var="tr" itemLabel="#{tr.type}" itemValue="#{tr}"/>
+					</p:selectOneMenu>
+					<p:commandButton value="Soumettre" action="#{claiming.doAjouterReclamation}" update="@all"/>
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+		<h2>Mes réclamations</h2>
+		<hr/>
+		<p:dataTable emptyMessage="Pas de réclamations!"
+					 paginator="true"
+					 paginatorPosition="bottom"
+					 rows="3"
+					 value="#{claiming.reclamations}"
+					 var="rec">
+		<p:column headerText="Type">
+			<h:outputText value="#{rec.typeReclamation.type}" />
+		</p:column>
+		<p:column headerText="Titre">
+			<h:outputText value="#{rec.titre}" />
+		</p:column>
+		<p:column headerText="Desciption">
+			<h:outputText value="#{rec.description}" />
+		</p:column>
+		</p:dataTable>
+	</ui:define>   
+	   
+</ui:composition>	   

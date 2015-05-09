@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:f="http://xmlns.jcp.org/jsf/core"
+	   xmlns:h="http://xmlns.jcp.org/jsf/html"
+	   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	   xmlns:jsf="http://xmlns.jcp.org/jsf"
+	   xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	   xmlns:p="http://primefaces.org/ui"
+	   template="/WEB-INF/template/template.xhtml">
+	   
+	<ui:define name="title">admin home</ui:define>   
+	<ui:define name="content">
+		<h1>Activer/désactiver un compte étudiant</h1>
+		<hr/>
+		<h:form id="etudiants">
+			<p:dataTable emptyMessage="Pas d'étudiant!"
+						 paginator="true"
+						 paginatorPosition="bottom"
+						 rows="4"
+						 value="#{accounts.etudiants}"
+						 var="stu">
+			<f:facet name="header">
+				<h:outputText value="Les comptes étudiant" />
+			</f:facet>
+			<p:column headerText="#">
+				<h:outputText value="#{stu.id}" />
+			</p:column>
+			<p:column headerText="nom">
+				<h:outputText value="#{stu.nom}" />
+			</p:column>
+			<p:column headerText="prenom">
+				<h:outputText value="#{stu.prenom}" />
+			</p:column>
+			<p:column headerText="email">
+				<h:outputText value="#{stu.email}" />
+			</p:column>
+			<p:column headerText="password">
+				<h:outputText value="#{stu.password}" />
+			</p:column>
+			<p:column headerText="action">
+				<p:commandButton value="#{stu.actif?'desactiver':'activer'}" action="#{accounts.doToggleStudentState(stu)}" update=":etudiants"/>
+			</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>   
+	   
+</ui:composition>	   

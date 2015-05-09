@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:f="http://java.sun.com/jsf/core"	
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+   <title><ui:insert name="title"/></title>
+   <h:outputStylesheet library="css" name="screen.css" />
+</h:head>
+<h:body>
+
+   <div id="container">
+		<div id="identity">
+            <ui:include src="/WEB-INF/template/identity.xhtml"/>
+        </div>
+      <div id="content">
+         
+         <ui:insert name="content">
+                    [Content will be inserted here]
+         </ui:insert>
+      </div>
+      <div id="footer">ESPRIT 2014</div>
+   </div>
+</h:body>
+</html>
